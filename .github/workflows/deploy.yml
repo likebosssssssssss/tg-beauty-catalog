@@ -1,0 +1,17 @@
+name: Deploy to Vercel
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy tg-app to Vercel
+        run: |
+          npm install -g vercel
+          cd tg-app
+          vercel --prod --token ${{ secrets.VERCEL_TOKEN }} --scope likebosssssssssss-projects --yes
