@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <!-- Запрет масштабирования — обязательно для TMA -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="theme-color" content="#2AABEE">
+    <title>Люся — Nail-мастер</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ===================================================
+     ОВЕРЛЕЙ ЗАГРУЗКИ — показывается при старте
+     =================================================== -->
+<div id="loading-overlay" class="loading-overlay">
+    <div class="loading-logo">💅</div>
+    <div class="loading-dots">
+        <span></span><span></span><span></span>
+    </div>
+</div>
+
+<!-- ===================================================
+     ЭКРАН 0 — ОНБОРДИНГ: первое открытие
+     =================================================== -->
+<div id="screen-onboarding" class="screen" data-screen="onboarding">
+    <div class="onboarding-body">
+        <div class="onboarding-wave">👋</div>
+        <h1 class="onboarding-greeting" id="onboarding-greeting">Привет!</h1>
+        <p class="onboarding-lead">Это каталог бьюти-мастера.<br>Вот что здесь можно:</p>
+        <ul class="onboarding-features">
+            <li>
+                <div class="onboarding-feat-icon">💅</div>
+                <div class="onboarding-feat-text">
+                    <span class="onboarding-feat-title">Посмотреть услуги и цены</span>
+                    <span class="onboarding-feat-sub">Портфолио работ с фото</span>
+                </div>
+            </li>
+            <li>
+                <div class="onboarding-feat-icon">📅</div>
+                <div class="onboarding-feat-text">
+                    <span class="onboarding-feat-title">Записаться онлайн</span>
+                    <span class="onboarding-feat-sub">Выбрать дату и время за пару тапов</span>
+                </div>
+            </li>
+            <li>
+                <div class="onboarding-feat-icon">🔔</div>
+                <div class="onboarding-feat-text">
+                    <span class="onboarding-feat-title">Получать напоминания</span>
+                    <span class="onboarding-feat-sub">Бот напомнит о записи за день</span>
+                </div>
+            </li>
+        </ul>
+        <button class="btn-primary btn-full" id="onboarding-start">Начать</button>
+    </div>
+</div>
+
+<!-- ===================================================
+     ОФФЕР-МОДАЛКА — первое открытие, один раз
+     =================================================== -->
+<div id="offer-modal" class="offer-overlay" aria-modal="true" role="dialog">
+    <div class="offer-card">
+        <div class="offer-emoji">🎁</div>
+        <h2 class="offer-title">Скидка 15% на первую запись</h2>
+        <p class="offer-subtitle">Подпишитесь на бота — получите промокод в личное сообщение</p>
+        <ul class="offer-bullets">
+            <li>Напомним о записи за день</li>
+            <li>Первыми узнаёте о свободных окошках</li>
+            <li>Эксклюзивные акции для подписчиков</li>
+        </ul>
+        <a class="btn-offer" id="offer-cta" href="https://t.me/beauty_lusia_bot?start=from_app" target="_blank">Получить скидку 15%</a>
+        <button class="offer-skip" id="offer-skip">Пропустить</button>
+    </div>
+</div>
+
+<!-- ===================================================
+     ЭКРАН 1 — ГЛАВНАЯ: профиль мастера + список услуг
+     =================================================== -->
+<div id="screen-home" class="screen" data-screen="home">
+
+    <!-- Прокручиваемое содержимое главного экрана -->
+    <div class="screen-scroll">
+
+    <!-- Шапка мастера -->
+    <div class="master-header">
+        <div class="master-avatar">
+            <div class="avatar-inner">Л</div>
+            <div class="avatar-ring"></div>
+        </div>
+        <div class="master-info">
+            <h1 class="master-name">Люся</h1>
+            <p class="master-specialty">Nail-мастер · Москва</p>
+            <div class="master-meta">
+                <span class="rating">
+                    <span class="star">★</span>
+                    <strong>4.9</strong>
+                    <span class="hint">127 отзывов</span>
+                </span>
+                <span class="status-badge status-active">
+                    <span class="status-dot"></span>
+                    Принимает записи
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Кнопка «Поделиться с другом» -->
+    <button class="share-btn" id="share-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
+            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+        </svg>
+        Поделиться с другом
+    </button>
+
+    <!-- Горизонтальные чипы категорий -->
+    <div class="categories-wrap">
+        <div class="categories-scroll" id="categories-scroll">
+            <button class="chip active" data-category="all">Все</button>
+            <button class="chip" data-category="manicure">Маникюр</button>
+            <button class="chip" data-category="pedicure">Педикюр</button>
+            <button class="chip" data-category="combo">Комбо</button>
+            <button class="chip" data-category="removal">Снятие</button>
+            <button class="chip" data-category="design">Дизайн</button>
+        </div>
+    </div>
+
+    <!-- Список услуг (заполняется через JS) -->
+    <div class="services-list" id="services-list">
+        <!-- Скелетоны загрузки -->
+        <div class="skeleton-card"></div>
+        <div class="skeleton-card"></div>
+        <div class="skeleton-card"></div>
+    </div>
+
+    </div><!-- /screen-scroll -->
+
+    <!-- Нижняя навигация -->
+    <nav class="bottom-nav" id="home-nav">
+        <button class="nav-btn active" data-nav="home">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+            <span>Главная</span>
+        </button>
+        <button class="nav-btn" data-nav="appointments">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                <line x1="16" y1="2" x2="16" y2="6"/>
+                <line x1="8" y1="2" x2="8" y2="6"/>
+                <line x1="3" y1="10" x2="21" y2="10"/>
+            </svg>
+            <span>Мои записи</span>
+        </button>
+    </nav>
+</div>
+
+<!-- ===================================================
+     ЭКРАН 3 — КАРТОЧКА УСЛУГИ: фото, описание, запись
+     =================================================== -->
+<div id="screen-service" class="screen" data-screen="service">
+
+    <!-- Заголовок с кнопкой назад (для браузера) -->
+    <div class="screen-header">
+        <button class="back-btn" id="service-back">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"/>
+            </svg>
+        </button>
+        <h2 class="screen-title" id="service-screen-title">Услуга</h2>
+        <div style="width:40px"></div>
+    </div>
+
+    <!-- Галерея фото -->
+    <div class="gallery-wrap" id="service-gallery-wrap">
+        <div class="gallery-track" id="service-gallery-track">
+            <!-- Генерируется JS -->
+        </div>
+        <div class="gallery-dots" id="service-gallery-dots"></div>
+    </div>
+
+    <!-- Тело карточки -->
+    <div class="service-detail-body">
+        <h2 class="service-detail-name" id="service-detail-name"></h2>
+        <div class="service-detail-meta">
+            <span class="service-price-big" id="service-detail-price"></span>
+            <span class="service-duration-tag">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"/>
+                    <polyline points="12 6 12 12 16 14"/>
+                </svg>
+                <span id="service-detail-duration"></span>
+            </span>
+        </div>
+        <p class="service-description" id="service-detail-description"></p>
+        <div class="service-includes" id="service-includes"></div>
+    </div>
+
+    <!-- Кнопка для браузера (в Telegram — MainButton) -->
+    <div class="screen-footer browser-only">
+        <button class="btn-primary btn-full" id="service-book-btn">Записаться →</button>
+    </div>
+</div>
+
+<!-- ===================================================
+     ЭКРАН 4 — ВЫБОР ДАТЫ И ВРЕМЕНИ
+     =================================================== -->
+<div id="screen-booking" class="screen" data-screen="booking">
+
+    <div class="screen-header">
+        <button class="back-btn" id="booking-back">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"/>
+            </svg>
+        </button>
+        <h2 class="screen-title">Выбор времени</h2>
+        <span class="step-badge">2 / 3</span>
+    </div>
+
+    <!-- Прогресс 2/3 -->
+    <div class="progress-bar"><div class="progress-fill" style="width:66%"></div></div>
+
+    <!-- Напоминание выбранной услуги -->
+    <div class="booking-hint">
+        <span class="booking-hint-name" id="booking-hint-name"></span>
+        <span class="booking-hint-price" id="booking-hint-price"></span>
+    </div>
+
+    <!-- Горизонтальная полоса дат (14 дней) -->
+    <div class="section-label">Выберите дату</div>
+    <div class="dates-scroll-wrap">
+        <div class="dates-scroll" id="dates-scroll"></div>
+    </div>
+
+    <!-- Фильтр времени суток -->
+    <div class="time-filter">
+        <button class="time-chip active" data-period="all">Все</button>
+        <button class="time-chip" data-period="morning">🌅 Утро</button>
+        <button class="time-chip" data-period="day">☀️ День</button>
+        <button class="time-chip" data-period="evening">🌙 Вечер</button>
+    </div>
+
+    <!-- Слоты времени -->
+    <div class="section-label" id="slots-label">Доступное время</div>
+    <div class="slots-grid" id="slots-grid"></div>
+
+    <!-- Кнопка для браузера -->
+    <div class="screen-footer browser-only">
+        <button class="btn-primary btn-full" id="booking-next-btn" disabled>Далее →</button>
+    </div>
+</div>
+
+<!-- ===================================================
+     ЭКРАН 5 — ПОДТВЕРЖДЕНИЕ ЗАПИСИ
+     =================================================== -->
+<div id="screen-confirm" class="screen" data-screen="confirm">
+
+    <div class="screen-header">
+        <button class="back-btn" id="confirm-back">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"/>
+            </svg>
+        </button>
+        <h2 class="screen-title">Подтверждение</h2>
+        <span class="step-badge">3 / 3</span>
+    </div>
+
+    <!-- Прогресс 3/3 -->
+    <div class="progress-bar"><div class="progress-fill" style="width:100%"></div></div>
+
+    <div class="confirm-body">
+        <p class="section-label">Ваша запись</p>
+
+        <!-- Карточка-итог -->
+        <div class="confirm-card">
+            <div class="confirm-row">
+                <span class="confirm-icon" id="confirm-emoji">💅</span>
+                <div class="confirm-text">
+                    <div class="confirm-value" id="confirm-service-name"></div>
+                    <div class="confirm-hint">Услуга</div>
+                </div>
+            </div>
+            <div class="confirm-divider"></div>
+            <div class="confirm-row">
+                <span class="confirm-icon">📅</span>
+                <div class="confirm-text">
+                    <div class="confirm-value" id="confirm-date"></div>
+                    <div class="confirm-hint">Дата и время</div>
+                </div>
+            </div>
+            <div class="confirm-divider"></div>
+            <div class="confirm-row">
+                <span class="confirm-icon">💰</span>
+                <div class="confirm-text">
+                    <div class="confirm-value accent" id="confirm-price"></div>
+                    <div class="confirm-hint">Стоимость</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Клиент из Telegram -->
+        <div class="client-card">
+            <div class="client-avatar" id="client-avatar-el">
+                <span id="client-avatar-letter">?</span>
+            </div>
+            <div class="client-info">
+                <div class="client-name" id="client-name-el">Гость</div>
+                <div class="client-username" id="client-username-el"></div>
+            </div>
+            <div class="client-tg-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8l-1.7 8.02c-.12.56-.45.7-.92.43l-2.52-1.86-1.22 1.17c-.13.13-.25.25-.52.25l.18-2.6 4.74-4.28c.21-.18-.04-.28-.32-.1l-5.86 3.69-2.52-.79c-.55-.17-.56-.55.12-.81l9.84-3.79c.45-.17.85.1.7.77z" fill="#2AABEE"/>
+                </svg>
+            </div>
+        </div>
+
+        <p class="confirm-terms">
+            Записываясь, вы соглашаетесь с условиями отмены. При отмене менее чем за 24 ч возможно удержание депозита.
+        </p>
+    </div>
+
+    <!-- Кнопка для браузера -->
+    <div class="screen-footer browser-only">
+        <button class="btn-primary btn-full" id="confirm-btn">Подтвердить запись ✓</button>
+    </div>
+</div>
+
+<!-- ===================================================
+     ЭКРАН 6 — УСПЕХ: запись оформлена!
+     =================================================== -->
+<div id="screen-success" class="screen" data-screen="success">
+    <div class="success-body">
+
+        <!-- Анимированный чекмарк SVG -->
+        <div class="success-checkmark">
+            <svg class="checkmark-svg" viewBox="0 0 120 120">
+                <circle class="checkmark-circle" cx="60" cy="60" r="52" fill="none" stroke-width="6"/>
+                <path class="checkmark-path" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" d="M 30 62 L 51 83 L 90 40"/>
+            </svg>
+        </div>
+
+        <h2 class="success-title">Запись оформлена!</h2>
+
+        <div class="success-details">
+            <div class="success-row">
+                <span class="success-row-icon" id="success-emoji">💅</span>
+                <span id="success-service-name"></span>
+            </div>
+            <div class="success-row">
+                <span class="success-row-icon">📅</span>
+                <span id="success-date"></span>
+            </div>
+            <div class="success-row">
+                <span class="success-row-icon">💰</span>
+                <span id="success-price" class="accent"></span>
+            </div>
+        </div>
+
+        <p class="success-reminder">🔔 Напомним за 24 ч и за 2 ч до визита</p>
+
+        <div class="success-actions">
+            <button class="btn-primary btn-full" id="success-to-appointments">К моим записям</button>
+            <button class="btn-ghost btn-full" id="success-to-home">На главную</button>
+        </div>
+    </div>
+</div>
+
+<!-- ===================================================
+     ЭКРАН 7 — МОИ ЗАПИСИ: предстоящие + история
+     =================================================== -->
+<div id="screen-appointments" class="screen" data-screen="appointments">
+
+    <div class="screen-header no-back">
+        <div style="width:40px"></div>
+        <h2 class="screen-title">Мои записи</h2>
+        <div style="width:40px"></div>
+    </div>
+
+    <div class="screen-scroll">
+    <div class="appointments-body" id="appointments-body">
+        <!-- Генерируется JS -->
+    </div>
+    </div><!-- /screen-scroll -->
+
+    <nav class="bottom-nav" id="appointments-nav">
+        <button class="nav-btn" data-nav="home">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+            <span>Главная</span>
+        </button>
+        <button class="nav-btn active" data-nav="appointments">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                <line x1="16" y1="2" x2="16" y2="6"/>
+                <line x1="8" y1="2" x2="8" y2="6"/>
+                <line x1="3" y1="10" x2="21" y2="10"/>
+            </svg>
+            <span>Мои записи</span>
+        </button>
+    </nav>
+</div>
+
+<!-- ===================================================
+     ЭКРАН 7а — ПОДТВЕРЖДЕНИЕ ОТМЕНЫ
+     =================================================== -->
+<div id="screen-cancel" class="screen" data-screen="cancel">
+
+    <div class="screen-header">
+        <button class="back-btn" id="cancel-back">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"/>
+            </svg>
+        </button>
+        <h2 class="screen-title">Отменить запись?</h2>
+        <div style="width:40px"></div>
+    </div>
+
+    <div class="cancel-body">
+        <!-- Карточка записи (заполняется JS) -->
+        <div class="cancel-card" id="cancel-card-details"></div>
+
+        <div class="cancel-warning">
+            <span>⚠️</span>
+            <p>При отмене менее чем за 24 часа до визита возможно удержание предоплаты</p>
+        </div>
+
+        <div class="cancel-actions">
+            <button class="btn-danger btn-full" id="cancel-confirm-btn">Да, отменить</button>
+            <button class="btn-ghost btn-full" id="cancel-keep-btn">Оставить запись</button>
+        </div>
+    </div>
+</div>
+
+<!-- Telegram WebApp SDK — обязательно первым -->
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<!-- ready() сразу — убирает лоадер Telegram даже если дальше будет ошибка -->
+<script>if(window.Telegram&&window.Telegram.WebApp)window.Telegram.WebApp.ready();</script>
+<!-- Данные мастера и услуг -->
+<script src="js/data.js?v=2"></script>
+<!-- Обёртка Telegram API -->
+<script src="js/tg.js?v=2"></script>
+<!-- Роутер (навигация между экранами) -->
+<script src="js/router.js?v=2"></script>
+<!-- Вся логика приложения -->
+<script src="js/app.js?v=2"></script>
+
+</body>
+</html>
