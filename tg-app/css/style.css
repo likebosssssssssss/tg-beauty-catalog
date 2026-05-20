@@ -63,7 +63,7 @@ html, body {
 }
 
 body {
-    font-family: 'Inter', -apple-system, 'SF Pro Text', 'Segoe UI', system-ui, sans-serif;
+    font-family: -apple-system, 'SF Pro Text', 'SF Pro Display', 'Segoe UI', system-ui, sans-serif;
     font-size: 15px;
     line-height: 1.45;
     background: var(--tg-bg);
@@ -507,7 +507,7 @@ body.tg-dark {
     cursor: pointer;
     flex-shrink: 0;
     transition: background var(--fast), transform var(--fast);
-    font-family: 'Inter', -apple-system, system-ui, sans-serif;
+    font-family: -apple-system, 'SF Pro Text', system-ui, sans-serif;
 }
 
 .btn-book:active {
@@ -1264,7 +1264,7 @@ body.tg-dark .skeleton-card::after {
     cursor: pointer;
     transition: background var(--fast), transform var(--fast);
     letter-spacing: 0.1px;
-    font-family: 'Inter', -apple-system, system-ui, sans-serif;
+    font-family: -apple-system, 'SF Pro Text', system-ui, sans-serif;
 }
 
 .btn-primary:active:not(:disabled) {
@@ -1287,7 +1287,7 @@ body.tg-dark .skeleton-card::after {
     font-weight: 600;
     cursor: pointer;
     transition: all var(--fast);
-    font-family: 'Inter', -apple-system, system-ui, sans-serif;
+    font-family: -apple-system, 'SF Pro Text', system-ui, sans-serif;
 }
 
 .btn-ghost:active {
@@ -1305,7 +1305,7 @@ body.tg-dark .skeleton-card::after {
     font-weight: 700;
     cursor: pointer;
     transition: all var(--fast);
-    font-family: 'Inter', -apple-system, system-ui, sans-serif;
+    font-family: -apple-system, 'SF Pro Text', system-ui, sans-serif;
 }
 
 .btn-danger:active {
@@ -1325,7 +1325,7 @@ body.tg-dark .skeleton-card::after {
     cursor: pointer;
     transition: all var(--fast);
     flex: 1;
-    font-family: 'Inter', -apple-system, system-ui, sans-serif;
+    font-family: -apple-system, 'SF Pro Text', system-ui, sans-serif;
 }
 
 .btn-sm:active { transform: scale(0.94); }
@@ -1463,7 +1463,7 @@ body.tg-app .browser-only { display: none !important; }
     font-weight: 600;
     cursor: pointer;
     transition: all var(--fast);
-    font-family: 'Inter', -apple-system, system-ui, sans-serif;
+    font-family: -apple-system, 'SF Pro Text', system-ui, sans-serif;
 }
 
 .share-btn:active {
@@ -1586,7 +1586,7 @@ body.tg-dark .offer-card {
     transition: opacity var(--fast), transform var(--fast);
     letter-spacing: 0.1px;
     box-shadow: 0 4px 16px rgba(46, 204, 113, 0.35);
-    font-family: 'Inter', -apple-system, system-ui, sans-serif;
+    font-family: -apple-system, 'SF Pro Text', system-ui, sans-serif;
 }
 
 .btn-offer:active {
