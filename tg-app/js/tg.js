@@ -50,10 +50,7 @@ const TG = (function () {
         if (p.button_color)       root.style.setProperty('--tg-button',       p.button_color);
         if (p.button_text_color)  root.style.setProperty('--tg-button-text',  p.button_text_color);
 
-        /* Синхронизируем акцент с кнопкой Telegram */
-        if (p.button_color) root.style.setProperty('--accent', p.button_color);
-        if (p.button_text_color) root.style.setProperty('--accent-light',
-            hexToRgba(p.button_color, 0.12));
+        /* Акцент бренда — не перезаписываем темой Telegram, используем свой зелёный */
 
         /* Тёмная тема */
         const dark = wa.colorScheme === 'dark';
