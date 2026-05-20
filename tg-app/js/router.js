@@ -23,15 +23,17 @@ const Router = (function () {
 
     /* ─── Перейти на экран ─── */
     function go(screenName, addToHistory = true) {
-        if (screenName === current) return;
-
-        const from = screens[current];
-        const to   = screens[screenName];
+        const to = screens[screenName];
 
         if (!to) {
             console.warn(`Router: экран "${screenName}" не найден`);
             return;
         }
+
+        /* Пропускаем только если экран уже визуально активен */
+        if (screenName === current && to.classList.contains('active')) return;
+
+        const from = screens[current];
 
         /* Анимация: текущий уходит влево */
         if (from) {

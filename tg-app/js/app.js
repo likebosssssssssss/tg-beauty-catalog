@@ -129,10 +129,18 @@ function renderOnboarding() {
 
 function finishOnboarding() {
     localStorage.setItem('beauty_onboarding_shown', '1');
+
+    /* Явно убираем онбординг и показываем home — надёжнее Router.go */
+    const onbEl  = document.getElementById('screen-onboarding');
+    const homeEl = document.getElementById('screen-home');
+    if (onbEl)  { onbEl.classList.add('slide-left'); onbEl.classList.remove('active'); }
+    if (homeEl) { homeEl.scrollTop = 0; homeEl.classList.remove('slide-left'); homeEl.classList.add('active'); }
+
+    /* Синхронизируем роутер */
     Router.go('home');
+
     setNavActive('home-nav', 'home');
     TG.Haptic.light();
-    /* Оффер после небольшой паузы */
     setTimeout(() => showOfferModal(), 800);
 }
 
