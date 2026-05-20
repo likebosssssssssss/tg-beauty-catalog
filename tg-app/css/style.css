@@ -7,23 +7,23 @@
 :root {
     /* Цвета темы Telegram — перезаписываются через JS из themeParams */
     --tg-bg:           #ffffff;
-    --tg-secondary-bg: #f4f4f5;
-    --tg-text:         #000000;
-    --tg-hint:         #999999;
-    --tg-link:         #2AABEE;
-    --tg-button:       #2AABEE;
+    --tg-secondary-bg: #f5f5f5;
+    --tg-text:         #1a1a2e;
+    --tg-hint:         #8e8e93;
+    --tg-link:         #2ECC71;
+    --tg-button:       #2ECC71;
     --tg-button-text:  #ffffff;
 
-    /* Акцент бренда */
-    --accent:          #2AABEE;
-    --accent-light:    rgba(42, 171, 238, 0.12);
-    --accent-dark:     #1a90cc;
+    /* Акцент бренда — зелёный Cryptoland */
+    --accent:          #2ECC71;
+    --accent-light:    rgba(46, 204, 113, 0.12);
+    --accent-dark:     #27AE60;
 
     /* Статусные цвета */
-    --success:         #34C759;
-    --warning:         #FF9500;
-    --danger:          #FF3B30;
-    --danger-light:    rgba(255, 59, 48, 0.10);
+    --success:         #2ECC71;
+    --warning:         #F39C12;
+    --danger:          #E74C3C;
+    --danger-light:    rgba(231, 76, 60, 0.10);
 
     /* Радиусы */
     --r-sm:   8px;
@@ -32,8 +32,8 @@
     --r-xl:   20px;
     --r-full: 50px;
 
-    /* Тени */
-    --shadow-card: 0 2px 16px rgba(0, 0, 0, 0.07);
+    /* Тени — плоский стиль Cryptoland */
+    --shadow-card: 0 1px 4px rgba(0, 0, 0, 0.05);
     --shadow-nav:  0 -1px 0 rgba(0, 0, 0, 0.06);
 
     /* Высоты блоков */
@@ -63,7 +63,7 @@ html, body {
 }
 
 body {
-    font-family: -apple-system, 'SF Pro Text', 'Segoe UI', system-ui, sans-serif;
+    font-family: 'Inter', -apple-system, 'SF Pro Text', 'Segoe UI', system-ui, sans-serif;
     font-size: 15px;
     line-height: 1.45;
     background: var(--tg-bg);
@@ -75,8 +75,8 @@ button { font-family: inherit; outline: none; }
 
 /* ─── Тёмная тема Telegram ─── */
 body.tg-dark {
-    --tg-bg:           #1c1c1e;
-    --tg-secondary-bg: #2c2c2e;
+    --tg-bg:           #1a1a2e;
+    --tg-secondary-bg: #232336;
     --tg-text:         #ffffff;
     --tg-hint:         #8e8e93;
     --shadow-card:     0 2px 16px rgba(0, 0, 0, 0.30);
@@ -271,14 +271,14 @@ body.tg-dark {
     width: 80px;
     height: 80px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #FF9A9E 0%, #FECFEF 50%, #C6ACEE 100%);
+    background: linear-gradient(135deg, #2ECC71 0%, #27AE60 100%);
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 30px;
     font-weight: 800;
     color: #fff;
-    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
     letter-spacing: -1px;
 }
 
@@ -501,12 +501,13 @@ body.tg-dark {
     background: var(--accent);
     color: #fff;
     border: none;
-    border-radius: var(--r-md);
+    border-radius: var(--r-full);
     font-size: 14px;
     font-weight: 700;
     cursor: pointer;
     flex-shrink: 0;
     transition: background var(--fast), transform var(--fast);
+    font-family: 'Inter', -apple-system, system-ui, sans-serif;
 }
 
 .btn-book:active {
@@ -970,7 +971,7 @@ body.tg-dark .skeleton-card::after {
     width: 44px;
     height: 44px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #2AABEE, #7B68EE);
+    background: linear-gradient(135deg, #2ECC71, #27AE60);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1257,12 +1258,13 @@ body.tg-dark .skeleton-card::after {
     background: var(--accent);
     color: #fff;
     border: none;
-    border-radius: var(--r-md);
+    border-radius: var(--r-full);
     font-size: 16px;
     font-weight: 700;
     cursor: pointer;
     transition: background var(--fast), transform var(--fast);
     letter-spacing: 0.1px;
+    font-family: 'Inter', -apple-system, system-ui, sans-serif;
 }
 
 .btn-primary:active:not(:disabled) {
@@ -1280,11 +1282,12 @@ body.tg-dark .skeleton-card::after {
     background: transparent;
     color: var(--tg-text);
     border: 1.5px solid rgba(128, 128, 128, 0.22);
-    border-radius: var(--r-md);
+    border-radius: var(--r-full);
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
     transition: all var(--fast);
+    font-family: 'Inter', -apple-system, system-ui, sans-serif;
 }
 
 .btn-ghost:active {
@@ -1297,11 +1300,12 @@ body.tg-dark .skeleton-card::after {
     background: var(--danger);
     color: #fff;
     border: none;
-    border-radius: var(--r-md);
+    border-radius: var(--r-full);
     font-size: 16px;
     font-weight: 700;
     cursor: pointer;
     transition: all var(--fast);
+    font-family: 'Inter', -apple-system, system-ui, sans-serif;
 }
 
 .btn-danger:active {
@@ -1317,10 +1321,11 @@ body.tg-dark .skeleton-card::after {
     padding: 0 14px;
     font-size: 13px;
     font-weight: 600;
-    border-radius: var(--r-md);
+    border-radius: var(--r-full);
     cursor: pointer;
     transition: all var(--fast);
     flex: 1;
+    font-family: 'Inter', -apple-system, system-ui, sans-serif;
 }
 
 .btn-sm:active { transform: scale(0.94); }
@@ -1453,11 +1458,12 @@ body.tg-app .browser-only { display: none !important; }
     background: var(--accent-light);
     color: var(--accent);
     border: 1.5px solid var(--accent);
-    border-radius: var(--r-md);
+    border-radius: var(--r-full);
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
     transition: all var(--fast);
+    font-family: 'Inter', -apple-system, system-ui, sans-serif;
 }
 
 .share-btn:active {
@@ -1469,7 +1475,7 @@ body.tg-app .browser-only { display: none !important; }
 .offer-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(80, 30, 10, 0.45);
+    background: rgba(0, 0, 0, 0.45);
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
     z-index: 1000;
@@ -1488,7 +1494,7 @@ body.tg-app .browser-only { display: none !important; }
 }
 
 .offer-card {
-    background: #fffaf6;
+    background: #ffffff;
     border-radius: var(--r-xl);
     padding: 32px 24px 24px;
     width: 100%;
@@ -1496,12 +1502,12 @@ body.tg-app .browser-only { display: none !important; }
     text-align: center;
     transform: translateY(28px);
     transition: transform var(--slow) var(--ease);
-    box-shadow: 0 24px 64px rgba(120, 50, 0, 0.22);
-    border-top: 4px solid #F4845F;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.18);
+    border-top: 4px solid var(--accent);
 }
 
 body.tg-dark .offer-card {
-    background: #2a1f18;
+    background: #232336;
     box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5);
 }
 
@@ -1520,31 +1526,23 @@ body.tg-dark .offer-card {
 .offer-title {
     font-size: 22px;
     font-weight: 900;
-    color: #2d1a0e;
+    color: var(--tg-text);
     line-height: 1.3;
     margin-bottom: 10px;
 }
 
-body.tg-dark .offer-title {
-    color: #f5e6da;
-}
-
 .offer-subtitle {
     font-size: 14px;
-    color: #8a6a56;
+    color: var(--tg-hint);
     line-height: 1.6;
     margin-bottom: 20px;
-}
-
-body.tg-dark .offer-subtitle {
-    color: #b89080;
 }
 
 .offer-bullets {
     list-style: none;
     text-align: left;
     margin-bottom: 24px;
-    background: rgba(244, 132, 95, 0.08);
+    background: var(--accent-light);
     border-radius: var(--r-md);
     padding: 14px 16px;
     display: flex;
@@ -1557,20 +1555,8 @@ body.tg-dark .offer-subtitle {
     align-items: center;
     gap: 10px;
     font-size: 14px;
-    color: #3d2010;
+    color: var(--tg-text);
     line-height: 1.4;
-}
-
-body.tg-dark .offer-bullets li {
-    color: #e8d0c0;
-}
-
-.offer-bullets {
-    background: rgba(244, 132, 95, 0.10);
-}
-
-body.tg-dark .offer-bullets {
-    background: rgba(244, 132, 95, 0.08);
 }
 
 .offer-bullets li::before {
@@ -1578,7 +1564,7 @@ body.tg-dark .offer-bullets {
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: #F4845F;
+    background: var(--accent);
     flex-shrink: 0;
 }
 
@@ -1588,10 +1574,10 @@ body.tg-dark .offer-bullets {
     justify-content: center;
     width: 100%;
     min-height: 52px;
-    background: linear-gradient(135deg, #F4845F 0%, #e8603a 100%);
+    background: var(--accent);
     color: #fff;
     border: none;
-    border-radius: var(--r-md);
+    border-radius: var(--r-full);
     font-size: 16px;
     font-weight: 700;
     cursor: pointer;
@@ -1599,7 +1585,8 @@ body.tg-dark .offer-bullets {
     margin-bottom: 12px;
     transition: opacity var(--fast), transform var(--fast);
     letter-spacing: 0.1px;
-    box-shadow: 0 4px 16px rgba(232, 96, 58, 0.40);
+    box-shadow: 0 4px 16px rgba(46, 204, 113, 0.35);
+    font-family: 'Inter', -apple-system, system-ui, sans-serif;
 }
 
 .btn-offer:active {

@@ -96,7 +96,7 @@ const TG = (function () {
         enable() {
             if (!wa) return;
             wa.MainButton.enable();
-            wa.MainButton.color = wa.themeParams.button_color || '#2AABEE';
+            wa.MainButton.color = wa.themeParams.button_color || '#2ECC71';
         },
 
         disable() {
