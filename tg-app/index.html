@@ -436,10 +436,24 @@
     </div>
 </div>
 
-<!-- Telegram WebApp SDK — обязательно первым -->
-<script src="https://telegram.org/js/telegram-web-app.js"></script>
-<!-- ready() сразу — убирает лоадер Telegram даже если дальше будет ошибка -->
-<script>if(window.Telegram&&window.Telegram.WebApp)window.Telegram.WebApp.ready();</script>
+<!-- Telegram WebApp SDK.
+     async: внутри Telegram SDK уже внедрён нативно — внешний скрипт не блокирует загрузку.
+     В браузере загружается асинхронно для тестирования. -->
+<script async src="https://telegram.org/js/telegram-web-app.js"></script>
+<script>
+    // Вызываем ready() сразу через нативный объект (доступен до загрузки страницы в Telegram)
+    if (window.Telegram && window.Telegram.WebApp) {
+        window.Telegram.WebApp.ready();
+        window.Telegram.WebApp.expand();
+    }
+    // Повтор после загрузки async-скрипта (нужен только в браузере для тестов)
+    window.addEventListener('load', function () {
+        if (window.Telegram && window.Telegram.WebApp) {
+            window.Telegram.WebApp.ready();
+            window.Telegram.WebApp.expand();
+        }
+    });
+</script>
 <!-- Данные мастера и услуг -->
 <script src="js/data.js?v=6"></script>
 <!-- Обёртка Telegram API -->
